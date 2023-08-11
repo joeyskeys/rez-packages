@@ -22,6 +22,7 @@ build_requires = [
 
 requires = [
     "tbb-2020.3",
+    "ptex",
 ]
 
 variants = []

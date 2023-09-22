@@ -18,9 +18,7 @@ build_requires = [
     "cmake"
 ]
 
-requires = [
-    "python-3.10"
-]
+requires = []
 
 variants = []
 

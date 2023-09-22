@@ -23,6 +23,7 @@ ExternalProject_add(
     CONFIGURE_COMMAND cmake
         -DCMAKE_INSTALL_PREFIX=$ENV{REZ_BUILD_INSTALL_PATH}
         -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON
         -DPython_EXECUTABLE=$ENV{REZ_PYTHON_ROOT}/bin/python
         ../${name}
     BUILD_COMMAND make ${make_args}

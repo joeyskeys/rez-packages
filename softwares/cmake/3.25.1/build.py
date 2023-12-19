@@ -67,7 +67,7 @@ def build(source_path, build_path, install_path, targets):
             if (make_proc.returncode != 0):
                 print('make failed, terminating...')
                 return
-            f = open('built', 'wb')
+            f = open('built', 'w')
             f.write('0')
             f.close()
 

@@ -2,7 +2,7 @@ import platform
 
 name = "gbenchmark"
 
-version = "1.6.1"
+version = "1.8.3"
 
 authors = [
     "Dominic Hamon",

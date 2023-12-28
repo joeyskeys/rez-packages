@@ -17,10 +17,13 @@ description = \
     """
 
 build_requires = [
-    "python-3.10"
+    "cmake",
+    "gcc"
 ]
 
-requires = []
+requires = [
+    "python-3.10",
+]
 
 variants = []
 

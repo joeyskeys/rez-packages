@@ -17,7 +17,8 @@ description = \
     """
 
 build_requires = [
-    "cmake"
+    "cmake",
+    "gcc",
 ]
 
 requires = [
@@ -35,7 +36,7 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "libs.opensubdiv"
+uuid = "libs.openvdb"
 
 
 def commands():

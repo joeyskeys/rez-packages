@@ -1,19 +1,18 @@
 import platform
 
-name = "gif"
+name = "de256"
 
-version = "5.2.1"
+version = "1.0.15"
 
 authors = [
-    "Michael Brown",
-    "Daniel Eisenbud",
-    "etc"
+    "Dr. Dirk Farin"
 ]
 
 description = \
     """
-    The GIFLIB project maintains the giflib service library,
-    which has been pulling images out of GIFs since 1989. 
+    libde265 is an open source implementation of the h.265 video codec. It is
+    written from scratch and has a plain C API to enable a simple integration
+    into other software.
     """
 
 build_requires = [
@@ -21,7 +20,11 @@ build_requires = [
     "gcc"
 ]
 
-requires = []
+requires = [
+    "jpeg-2.1.0",
+    "png-1.6.37",
+    "zlib-1.2.11",
+]
 
 variants = []
 
@@ -30,11 +33,13 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "libs.gif"
+uuid = "libs.de256"
 
 
 def commands():
+    env.CPATH.append("{root}/include")
     env.LD_LIBRARY_PATH.append("{root}/lib")
+    env.CMAKE_PREFIX_PATH.append("{root}/lib/cmake")
 
     if building:
         env.PKG_CONFIG_PATH.append("{root}/lib/pkgconfig")

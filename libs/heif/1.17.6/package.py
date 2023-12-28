@@ -1,20 +1,18 @@
 import platform
 
-name = "imath"
+name = "heif"
 
-version = "3.1.5"
+version = "1.17.6"
 
 authors = [
-    "ILM"
+    "Dr. Dirk Farin"
 ]
 
 description = \
     """
-    Imath is a basic, light-weight, and efficient C++ representation of
-    2D and 3D vectors and matrices and other simple but useful
-    mathematical objects, functions, and data types common in computer
-    graphics applications, including the “half” 16-bit floating-point
-    type.
+    libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 Image File Format)
+    file format decoder and encoder. There is partial support for ISO/IEC
+    23008-12:2022 (2nd Edition) capabilities.
     """
 
 build_requires = [
@@ -23,8 +21,10 @@ build_requires = [
 ]
 
 requires = [
-    "boost-1.80",
-    "python-3.10",
+    "jpeg-2.1.0",
+    "png-1.6.37",
+    "de256-1.0.15",
+    "zlib-1.2.11",
 ]
 
 variants = []
@@ -34,13 +34,13 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "libs.oiio"
+uuid = "libs.heif"
 
 
 def commands():
     env.CPATH.append("{root}/include")
     env.LD_LIBRARY_PATH.append("{root}/lib")
-    env.CMAKE_PREFIX_PATH.append("{root}/lib/cmake/Imath")
+    env.CMAKE_PREFIX_PATH.append("{root}/lib/cmake")
 
     if building:
         env.PKG_CONFIG_PATH.append("{root}/lib/pkgconfig")

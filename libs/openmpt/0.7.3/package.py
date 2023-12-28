@@ -1,28 +1,26 @@
 import platform
 
-name = "pybind11"
+name = "openmpt"
 
-version = "2.10.1"
+version = "0.7.3"
 
 authors = [
-    "Wenzel Jacob"
+    "Olivier Lapicque"
 ]
 
 description = \
     """
-    pybind11 is a lightweight header-only library that exposes C++ types
-    in Python and vice versa, mainly to create Python bindings of existing
-    C++ code.
+    OpenMPT is an open-source audio module tracker for Windows (with an
+    intended Wine-functionality for UNIX and Linux x86-systems).
     """
 
 build_requires = [
     "cmake",
-    "gcc"
+    "gcc",
 ]
 
 requires = [
-    "python-3.10",
-    "zlib-1.2.11"
+    "zlib-1.2.11",
 ]
 
 variants = []
@@ -32,13 +30,12 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "libs.pybind11"
+uuid = "libs.openmpt"
 
 
 def commands():
     env.LD_LIBRARY_PATH.append("{root}/lib")
-    env.CMAKE_PREFIX_PATH.append("{root}/share/cmake/pybind11")
-    env.CMAKE_MODULE_PATH.append("{root}/share/cmake/pybind11")
+    env.CMAKE_PREFIX_PATH.append("{root}")
 
     if building:
         env.PKG_CONFIG_PATH.append("{root}/lib/pkgconfig")

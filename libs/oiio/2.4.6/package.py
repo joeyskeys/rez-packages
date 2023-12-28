@@ -15,7 +15,8 @@ description = \
     """
 
 build_requires = [
-    "cmake"
+    "cmake",
+    "gcc"
 ]
 
 requires = [
@@ -29,10 +30,13 @@ requires = [
     "tiff-4.3.0",
     "gif-5.2",
     "png-1.6.37",
-    #"openvdb-10.0",
+    "heif-1.17.6",
+    "openvdb-10.0",
     "zlib-1.2.11",
     "fmt-8.0.1",
-    "pybind11-2.10"
+    "pybind11-2.10",
+    "openmpt-0.7",
+    "srt-1.5",
 ]
 
 variants = []

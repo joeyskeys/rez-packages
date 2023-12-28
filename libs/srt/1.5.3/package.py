@@ -1,16 +1,18 @@
 import platform
 
-name = "yamlcpp"
+name = "srt"
 
-version = "0.7.0"
+version = "1.5.3"
 
 authors = [
-    "Jesse Beder"
+    "Haivision stuffs",
 ]
 
 description = \
     """
-    yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
+    Secure Reliable Transport (SRT) is a transport protocol for ultra low
+    (sub-second) latency live video and audio streaming, as well as for
+    generic bulk data transfer.
     """
 
 build_requires = [
@@ -19,7 +21,7 @@ build_requires = [
 ]
 
 requires = [
-    "zlib-1.2.11"
+    "zlib-1.2"
 ]
 
 variants = []
@@ -29,12 +31,12 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "libs.yamlcpp"
+uuid = "libs.srt"
 
 
 def commands():
     env.LD_LIBRARY_PATH.append("{root}/lib")
-    env.CMAKE_PREFIX_PATH.append("{root}/lib/cmake/yaml-cpp")
+    env.CMAKE_PREFIX_PATH.append("{root}")
 
     if building:
         env.PKG_CONFIG_PATH.append("{root}/lib/pkgconfig")

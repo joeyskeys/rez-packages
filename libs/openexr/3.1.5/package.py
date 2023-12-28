@@ -16,10 +16,12 @@ description = \
     """
 
 build_requires = [
-    "cmake"
+    "cmake",
+    "gcc"
 ]
 
 requires = [
+    "imath-3.1",
     "python-3.10",
     "boost-1.80",
     "zlib-1.2.11"

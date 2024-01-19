@@ -24,9 +24,9 @@ ExternalProject_add(
     CONFIGURE_COMMAND cmake
         -DCMAKE_INSTALL_PREFIX=$ENV{REZ_BUILD_INSTALL_PATH}
         -DCMAKE_BUILD_TYPE=Release
-        -DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra;lldb;compiler-rt;libc;openmp
-        -DLLVM_ENABLE_RUNTIMES=libc;libcxx;libcxxabi;openmp
+        -DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra;lldb;compiler-rt
         -DLLVM_ENABLE_RTTI=ON
+        -DLIBCXX_ENABLE_SHARED=OFF
         ../${name}/llvm
     BUILD_COMMAND make ${make_args}
     INSTALL_COMMAND ${install_cmd}

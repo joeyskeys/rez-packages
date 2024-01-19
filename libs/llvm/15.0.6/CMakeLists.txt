@@ -25,7 +25,7 @@ ExternalProject_add(
         -DCMAKE_INSTALL_PREFIX=$ENV{REZ_BUILD_INSTALL_PATH}
         -DCMAKE_BUILD_TYPE=Release
         -DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra;lldb;compiler-rt;libc;openmp
-        -DLLVM_ENABLE_RUNTIMES=libc;libcxx;libcxxabi;openmp
+        -DLLVM_ENABLE_RUNTIMES=libcxx;libcxxabi;openmp
         -DLLVM_ENABLE_RTTI=ON
         ../${name}/llvm
     BUILD_COMMAND make ${make_args}

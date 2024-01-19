@@ -19,7 +19,8 @@ description = \
     """
 
 build_requires = [
-    "cmake"
+    "cmake",
+    "gcc"
 ]
 
 requires = []

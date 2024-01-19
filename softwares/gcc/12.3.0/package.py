@@ -32,6 +32,7 @@ def commands():
     env.PATH.append("{root}/bin")
     env.CC = "{root}/bin/gcc"
     env.CXX = "{root}/bin/g++"
+    env.CPLUS_INCLUDE_PATH = "{root}/include"
     env.LD_LIBRARY_PATH.append("{root}/lib64")
 
     if building:

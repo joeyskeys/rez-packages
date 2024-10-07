@@ -1,0 +1,11 @@
+diff -Naur gettext-0.21_origin/gettext-tools/src/locating-rule.c gettext-0.21_modified/gettext-tools/src/locating-rule.c
+--- gettext-0.21_origin/gettext-tools/src/locating-rule.c	2020-07-06 04:47:41.000000000 +0800
++++ gettext-0.21_modified/gettext-tools/src/locating-rule.c	2024-09-17 01:45:32.523085553 +0800
+@@ -47,6 +47,7 @@
+ #include <libxml/parser.h>
+ #include <libxml/uri.h>
+ #include "xalloc.h"
++#include <stdlib.h>
+ 
+ #define _(str) gettext (str)
+ 

@@ -1,28 +1,23 @@
 import platform
 
-name = "python"
+name = "binutils"
 
-version = "3.10.9"
+version = "2.31.1"
 
 authors = [
-    "Guido van Rossum"
+    "Michael Larabel and others"
 ]
 
 description = \
     """
-    Python is an interpreted high-level general-purpose programming 
-    language.
+    Collection of tools for operating on object files.
     """
 
 build_requires = [
-    "cmake",
     "gcc"
 ]
 
-requires = [
-    "zlib-1.2.11",
-    "openssl-1.1.1",
-]
+requires = []
 
 variants = []
 
@@ -31,12 +26,14 @@ if platform.system() == "Darwin":
 elif platform.system() == "Linux":
     variants.append(["platform-linux", "arch-x86_64"])
 
-uuid = "softwares.python"
+uuid = "softwares.binutils"
+
+build_command = 'python {root}/build.py {install}'
 
 
 def commands():
-    env.CMAKE_MODULE_PATH.append("{root}/cmake")
     env.PATH.append("{root}/bin")
+    env.LD_LIBRARY_PATH.append("{root}/lib")
 
     if building:
         env.PKG_CONFIG_PATH.append("{root}/lib/pkgconfig")

@@ -20,7 +20,10 @@ description = \
     """
 
 build_requires = [
-    "gcc-12"
+    "binutils",
+    "gcc",
+    "glibc",
+    "python",
 ]
 
 requires = [

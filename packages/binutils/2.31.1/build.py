@@ -9,12 +9,14 @@ import functools
 
 
 def build(source_path, build_path, install_path, targets):
-    package_url = 'https://github.com/Kitware/CMake/releases/download/v3.25.1/cmake-3.25.1.tar.gz'
+    package_url = 'https://ftp.gnu.org/gnu/binutils/binutils-2.31.1.tar.xz'
     package_name = os.path.basename(package_url)
-    # extension name .tar.gz is kinda special, the following logic is specific
+    # extension name .tar.xz is kinda special, the following logic is specific
     # to this downloading url
-    extension_idx = package_name.find('.tar.gz')
+    extension_idx = package_name.find('.tar.xz')
     folder_name = package_name[:extension_idx]
+    build_folder = "build"
+    build_folder_path = os.path.join(build_path, build_folder)
 
     def terminate_proc(proc, sig, frame):
         try:
@@ -38,25 +40,24 @@ def build(source_path, build_path, install_path, targets):
             f = tarfile.open(package_name)
             f.extractall(build_path)
 
-        os.chdir(os.path.join(build_path, folder_name))
+        if not os.path.exists(build_folder_path):
+            os.makedirs(build_folder_path)
+        os.chdir(build_folder_path)
 
-        bootstrapped_path = os.path.join(build_path, folder_name, 'bootstrapped')
-        if not os.path.exists(bootstrapped_path):
+        makefile_path = os.path.join(build_path, build_folder, 'Makefile')
+        if not os.path.exists(makefile_path):
             print('package not configured, configure now...')
-            bootstrap_proc = subprocess.Popen('./bootstrap --prefix=$REZ_BUILD_INSTALL_PATH', shell=True)
-            handler = functools.partial(terminate_proc, bootstrap_proc)
+            configure_proc = subprocess.Popen('../{}/configure --prefix=$REZ_BUILD_INSTALL_PATH'.format(folder_name), shell=True)
+            handler = functools.partial(terminate_proc, configure_proc)
             signal.signal(signal.SIGINT, handler)
             signal.signal(signal.SIGTERM, handler)
-            bootstrap_proc.wait()
-            print('bootstrap return code', bootstrap_proc.returncode)
-            if (bootstrap_proc.returncode != 0):
-                print('bootstrap failed, terminating...')
+            configure_proc.wait()
+            print('configure return code', configure_proc.returncode)
+            if (configure_proc.returncode != 0):
+                print('configure failed, terminating...')
                 return
-            f = open('bootstrapped', 'wb')
-            f.write('0')
-            f.close()
 
-        built_path = os.path.join(build_path, folder_name, 'built')
+        built_path = os.path.join(build_path, build_folder, 'built')
         if not os.path.exists(built_path):
             print('package not built, build now...')
             make_proc = subprocess.Popen('make -j{}'.format(os.cpu_count()), shell=True)
@@ -75,7 +76,7 @@ def build(source_path, build_path, install_path, targets):
 
     def _install():
         print('installing package...')
-        os.chdir(os.path.join(build_path, folder_name))
+        os.chdir(build_folder_path)
         install_proc = subprocess.Popen('make install', shell=True)
         handler = functools.partial(terminate_proc, install_proc)
         signal.signal(signal.SIGINT, handler)
